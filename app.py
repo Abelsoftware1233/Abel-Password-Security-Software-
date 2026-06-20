@@ -3,9 +3,15 @@ from flask_cors import CORS
 import hashlib
 import itertools
 import string
+import time
 
 app = Flask(__name__)
 CORS(app)
+
+# ===== CONFIGURATIE =====
+MAX_LENGTH = 6  # Langere wachtwoorden (was 4)
+PORT = 8080  # Andere poort (was 5000)
+CHARSET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'  # Meer tekens (was alleen lowercase + digits)
 
 # ===== JOHN THE RIPPER =====
 @app.route('/crack/john', methods=['POST'])
@@ -14,19 +20,20 @@ def john_crack():
     hash_val = data.get('hash', '').strip()
     wordlist = data.get('wordlist', [])
     
+    # Eerst dictionary attack
     for word in wordlist:
         if (hashlib.sha1(word.encode()).hexdigest() == hash_val or
             hashlib.md5(word.encode()).hexdigest() == hash_val or
             hashlib.sha256(word.encode()).hexdigest() == hash_val):
             return jsonify({'found': True, 'password': word, 'method': 'John (dictionary)'})
     
-    chars = string.ascii_lowercase + string.digits
-    for length in range(1, 5):
-        for combo in itertools.product(chars, repeat=length):
+    # Dan brute force met de grotere charset en langere lengte
+    for length in range(1, MAX_LENGTH + 1):
+        for combo in itertools.product(CHARSET, repeat=length):
             word = ''.join(combo)
             if (hashlib.sha1(word.encode()).hexdigest() == hash_val or
                 hashlib.md5(word.encode()).hexdigest() == hash_val):
-                return jsonify({'found': True, 'password': word, 'method': 'John (brute force)'})
+                return jsonify({'found': True, 'password': word, 'method': f'John (brute force, lengte {length})'})
     
     return jsonify({'found': False})
 
@@ -35,11 +42,10 @@ def john_crack():
 def brute_crack():
     data = request.json
     hash_val = data.get('hash', '').strip()
-    max_len = int(data.get('maxlen', 4))
+    max_len = int(data.get('maxlen', MAX_LENGTH))
     
-    chars = string.ascii_lowercase + string.digits
     for length in range(1, max_len + 1):
-        for combo in itertools.product(chars, repeat=length):
+        for combo in itertools.product(CHARSET, repeat=length):
             word = ''.join(combo)
             if hashlib.md5(word.encode()).hexdigest() == hash_val:
                 return jsonify({'found': True, 'password': word, 'method': f'Brute force (lengte {length})'})
@@ -74,6 +80,8 @@ def rainbow_crack():
         '21232f297a57a5a743894a0e4a801fc3': 'admin',
         '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8': 'wachtwoord',
         '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918': 'admin',
+        'e38ad214943daad1d64c102faec29de4afe9da3d': 'hallo',
+        'b7a875fc1ea228b9061041b7cec4bd3c52ab3ce3': 'defensie'
     }
     
     if hash_val in rainbow_table:
@@ -98,6 +106,10 @@ def mask_crack():
                 pools.append(string.digits)
             elif pattern[i+1] == 'u':
                 pools.append(string.ascii_uppercase)
+            elif pattern[i+1] == 'a':
+                pools.append(string.ascii_letters)  # Alle letters
+            elif pattern[i+1] == 's':
+                pools.append(string.ascii_letters + string.digits)  # Alles
             else:
                 pools.append(pattern[i+1])
             i += 2
@@ -125,7 +137,24 @@ def mask_crack():
     
     return jsonify({'found': False})
 
+# ===== STATUS CHECK =====
+@app.route('/status', methods=['GET'])
+def status():
+    return jsonify({
+        'status': 'online',
+        'version': '3.0.0',
+        'max_length': MAX_LENGTH,
+        'charset_size': len(CHARSET),
+        'port': PORT
+    })
+
 if __name__ == '__main__':
-    print("🚀 CRYPTEX Backend gestart op http://localhost:5000")
-    print("⚠️ Alleen voor geautoriseerd gebruik!")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    print("=" * 50)
+    print("🚀 CRYPTEX Backend gestart")
+    print("=" * 50)
+    print(f"📡 Poort: {PORT}")
+    print(f"🔢 Maximale lengte: {MAX_LENGTH}")
+    print(f"🔤 Charset grootte: {len(CHARSET)} tekens")
+    print(f"⚠️ Alleen voor geautoriseerd gebruik!")
+    print("=" * 50)
+    app.run(debug=True, host='0.0.0.0', port=PORT)
