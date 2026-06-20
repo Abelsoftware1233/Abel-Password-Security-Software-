@@ -19,3 +19,30 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+---
+
+## 🛡️ Waarom deze aanpak?
+
+| Element | Waarom |
+|---------|--------|
+| **`config.example.json`** | Geen echte wachtwoorden in de repo |
+| **`.gitignore`** | Voorkomt per ongeluk uploaden van echte config |
+| **Standaard max lengte 4** | Onbruikbaar voor echte aanvallen |
+| **Alleen localhost** | Kan alleen op eigen systeem draaien |
+| **Duidelijke disclaimer** | Juridische bescherming |
+
+---
+
+## ⚠️ Belangrijk!
+
+**Upload NOOIT een `config.json` met:**
+- Echte wachtwoorden
+- Live IP-adressen
+- Productiesleutels
+- Database credentials
+
+**Gebruik altijd `config.example.json`** op GitHub en voeg `config.json` toe aan `.gitignore`!
+
+Dit maakt je project **legaal veiliger** en voorkomt dat kwaadwillenden jouw configuratie misbruiken. 🛡️
