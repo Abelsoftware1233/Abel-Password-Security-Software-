@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>🔐 CRYPTEX - Cracker Suite</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <!-- Glitch effect overlay -->
+    <div class="glitch-overlay"></div>
+    
+    <!-- Particle background -->
+    <canvas id="particles"></canvas>
+
+    <header>
+      <div class="logo-container">
+        <div class="logo-icon">⚡</div>
+        <div>
+          <h1>CRYPTEX</h1>
+          <p class="sub">SECURE CRACKING SUITE v3.0</p>
+        </div>
+      </div>
+      <div class="status-badge">
+        <span class="dot"></span>
+        <span>ACTIVE</span>
+      </div>
+    </header>
+
+    <div class="security-banner">
+      <span>🔒 CLASSIFIED · DEFENSE AUTHORIZED · 🔒</span>
+    </div>
+
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="john">
+        <span class="icon">🧨</span>
+        <span class="label">John</span>
+      </button>
+      <button class="tab-btn" data-tab="brute">
+        <span class="icon">💣</span>
+        <span class="label">Brute</span>
+      </button>
+      <button class="tab-btn" data-tab="dict">
+        <span class="icon">📖</span>
+        <span class="label">Dict</span>
+      </button>
+      <button class="tab-btn" data-tab="rainbow">
+        <span class="icon">🌈</span>
+        <span class="label">Rainbow</span>
+      </button>
+      <button class="tab-btn" data-tab="mask">
+        <span class="icon">🎭</span>
+        <span class="label">Mask</span>
+      </button>
+    </nav>
+
+    <main>
+      <!-- JOHN THE RIPPER -->
+      <section id="john" class="tab-content active">
+        <div class="tool-header">
+          <h2>John the Ripper</h2>
+          <span class="tool-badge">DICT + BRUTE</span>
+        </div>
+        <p class="tool-desc">Geavanceerde hybride attack met fallback brute force.</p>
+        <div class="input-group">
+          <div class="input-wrapper">
+            <label>🔑 Hash (SHA1)</label>
+            <input type="text" id="john-hash" placeholder="Voer SHA1 hash in..." class="input-field" value="5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8">
+          </div>
+          <div class="input-wrapper">
+            <label>📝 Woordenlijst</label>
+            <input type="text" id="john-wordlist" placeholder="woorden,gescheiden,door,komma's" value="wachtwoord,admin,123456,defensie,geheim,topsecret,password,secret,root" class="input-field">
+          </div>
+        </div>
+        <button class="crack-btn" data-tool="john">
+          <span class="btn-icon">▶</span>
+          INITIEER AANVAL
+        </button>
+        <div class="output" id="john-output">
+          <span class="placeholder">⏳ Wacht op commando...</span>
+        </div>
+      </section>
+
+      <!-- BRUTE FORCE -->
+      <section id="brute" class="tab-content">
+        <div class="tool-header">
+          <h2>Brute Force</h2>
+          <span class="tool-badge">EXHAUSTIVE</span>
+        </div>
+        <p class="tool-desc">Probeert alle combinaties van lowercase letters en cijfers.</p>
+        <div class="input-group">
+          <div class="input-wrapper">
+            <label>🔑 Hash (MD5)</label>
+            <input type="text" id="brute-hash" placeholder="Voer MD5 hash in..." class="input-field" value="e10adc3949ba59abbe56e057f20f883e">
+          </div>
+          <div class="input-wrapper">
+            <label>📏 Maximale lengte</label>
+            <input type="number" id="brute-maxlen" placeholder="Max lengte" value="4" min="1" max="6" class="input-field">
+          </div>
+        </div>
+        <button class="crack-btn" data-tool="brute">
+          <span class="btn-icon">▶</span>
+          START BRUTE FORCE
+        </button>
+        <div class="output" id="brute-output">
+          <span class="placeholder">⏳ Wacht op commando...</span>
+        </div>
+      </section>
+
+      <!-- DICTIONARY ATTACK -->
+      <section id="dict" class="tab-content">
+        <div class="tool-header">
+          <h2>Dictionary Attack</h2>
+          <span class="tool-badge">CUSTOM</span>
+        </div>
+        <p class="tool-desc">Eigen woordenlijst voor gerichte aanvallen.</p>
+        <div class="input-group">
+          <div class="input-wrapper">
+            <label>🔑 Hash (SHA256)</label>
+            <input type="text" id="dict-hash" placeholder="Voer SHA256 hash in..." class="input-field" value="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918">
+          </div>
+          <div class="input-wrapper">
+            <label>📝 Woordenlijst (één per regel)</label>
+            <textarea id="dict-words" rows="4" placeholder="woord1&#10;woord2&#10;woord3">defensie
+geheim
+topsecret
+wachtwoord
+admin
+password
+123456
+root
+secret
+changeme</textarea>
+          </div>
+        </div>
+        <button class="crack-btn" data-tool="dict">
+          <span class="btn-icon">▶</span>
+          START DICTIONARY
+        </button>
+        <div class="output" id="dict-output">
+          <span class="placeholder">⏳ Wacht op commando...</span>
+        </div>
+      </section>
+
+      <!-- RAINBOW TABLE -->
+      <section id="rainbow" class="tab-content">
+        <div class="tool-header">
+          <h2>Rainbow Table</h2>
+          <span class="tool-badge">PRE-COMPUTED</span>
+        </div>
+        <p class="tool-desc">Directe lookup in vooraf berekende hash-tabel.</p>
+        <div class="input-group">
+          <div class="input-wrapper">
+            <label>🔑 Hash (MD5)</label>
+            <input type="text" id="rainbow-hash" placeholder="Voer MD5 hash in..." class="input-field" value="25f9e794323b453885f5181f1b624d0b">
+          </div>
+        </div>
+        <button class="crack-btn" data-tool="rainbow">
+          <span class="btn-icon">▶</span>
+          QUERY RAINBOW
+        </button>
+        <div class="output" id="rainbow-output">
+          <span class="placeholder">⏳ Wacht op commando...</span>
+        </div>
+      </section>
+
+      <!-- MASK ATTACK -->
+      <section id="mask" class="tab-content">
+        <div class="tool-header">
+          <h2>Mask Attack</h2>
+          <span class="tool-badge">PATTERN</span>
+        </div>
+        <p class="tool-desc">?l = lowercase · ?d = digit · ?u = uppercase</p>
+        <div class="input-group">
+          <div class="input-wrapper">
+            <label>🔑 Hash (SHA1)</label>
+            <input type="text" id="mask-hash" placeholder="Voer hash in..." class="input-field" value="b7a875fc1ea228b9061041b7cec4bd3c52ab3ce3">
+          </div>
+          <div class="input-wrapper">
+            <label>🎭 Masker patroon</label>
+            <input type="text" id="mask-pattern" placeholder="bv. ?l?l?d?d" value="?l?l?d?d" class="input-field">
+          </div>
+        </div>
+        <button class="crack-btn" data-tool="mask">
+          <span class="btn-icon">▶</span>
+          EXECUTE MASK
+        </button>
+        <div class="output" id="mask-output">
+          <span class="placeholder">⏳ Wacht op commando...</span>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <span>✅ AUTHORIZED USE ONLY</span>
+        <span class="divider">|</span>
+        <span>🔐 DEFENSE CLASSIFIED</span>
+        <span class="divider">|</span>
+        <span id="timestamp"></span>
+      </div>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
