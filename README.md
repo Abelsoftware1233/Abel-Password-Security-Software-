@@ -522,8 +522,8 @@ Veelvoorkomende problemen
 
 ```bash
 # Controleer of de poort vrij is
-sudo lsof -i :8080  # Linux/Mac
-netstat -ano | findstr :8080  # Windows
+sudo lsof -i :5002  # Linux/Mac
+netstat -ano | findstr :5002  # Windows
 
 # Andere poort gebruiken
 PORT=8081 python app.py
