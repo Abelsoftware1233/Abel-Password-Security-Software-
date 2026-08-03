@@ -10,7 +10,7 @@ CORS(app)
 
 # ===== CONFIGURATIE =====
 MAX_LENGTH = 6  # Langere wachtwoorden (was 4)
-PORT = 8080  # Andere poort (was 5000)
+PORT = 5002  # Andere poort (was 5000)
 CHARSET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'  # Meer tekens (was alleen lowercase + digits)
 
 # ===== JOHN THE RIPPER =====
