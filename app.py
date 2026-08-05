@@ -157,4 +157,4 @@ if __name__ == '__main__':
     print(f"🔤 Charset grootte: {len(CHARSET)} tekens")
     print(f"⚠️ Alleen voor geautoriseerd gebruik!")
     print("=" * 50)
-    app.run(debug=True, host='0.0.0.0', port=5014)
+    app.run(debug=False, host='0.0.0.0', port=5014)
