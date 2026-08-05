@@ -10,7 +10,7 @@ CORS(app)
 
 # ===== CONFIGURATIE =====
 MAX_LENGTH = 6  # Langere wachtwoorden (was 4)
-PORT = 5002  # Andere poort (was 5000)
+PORT = 5014  # Andere poort (was 5000)
 CHARSET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'  # Meer tekens (was alleen lowercase + digits)
 
 # ===== JOHN THE RIPPER =====
@@ -145,7 +145,7 @@ def status():
         'version': '3.0.0',
         'max_length': MAX_LENGTH,
         'charset_size': len(CHARSET),
-        'port': PORT
+        'port': 5014
     })
 
 if __name__ == '__main__':
@@ -157,4 +157,4 @@ if __name__ == '__main__':
     print(f"🔤 Charset grootte: {len(CHARSET)} tekens")
     print(f"⚠️ Alleen voor geautoriseerd gebruik!")
     print("=" * 50)
-    app.run(debug=True, host='0.0.0.0', port=PORT)
+    app.run(debug=True, host='0.0.0.0', port=5014)
