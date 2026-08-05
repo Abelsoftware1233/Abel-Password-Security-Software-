@@ -1,5 +1,5 @@
 // ===== BACKEND CONFIG =====
-const API_BASE = 'http://192.168.1.100:5002';  // Andere server (was localhost:5000)
+const API_BASE = 'https://wachtwoord.abelsoftware123.com';  // Andere server (is 87.106.41.140:5014)
 const MAX_LENGTH = 6;  // Langere wachtwoorden testen (was 4)
 
 // ===== PARTICLE BACKGROUND =====
