@@ -151,7 +151,7 @@ Je zou deze output moeten zien:
 ==================================================
 🚀 CRYPTEX Backend gestart
 ==================================================
-📡 Poort: 8080
+📡 Poort: 5014
 🔢 Maximale lengte: 6
 🔤 Charset grootte: 62 tekens
 ⚠️ Alleen voor geautoriseerd gebruik!
@@ -184,8 +184,8 @@ Pas deze variabelen aan naar wens:
 # Maximale lengte voor brute force (standaard: 6)
 MAX_LENGTH = 6
 
-# Poort voor de backend (standaard: 8080)
-PORT = 8080
+# Poort voor de backend (standaard: 5014)
+PORT = 5014
 
 # Karakterset voor brute force
 CHARSET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
@@ -522,8 +522,8 @@ Veelvoorkomende problemen
 
 ```bash
 # Controleer of de poort vrij is
-sudo lsof -i :5002  # Linux/Mac
-netstat -ano | findstr :5002  # Windows
+sudo lsof -i :5014  # Linux/Mac
+netstat -ano | findstr :5014  # Windows
 
 # Andere poort gebruiken
 PORT=8081 python app.py
@@ -598,7 +598,7 @@ Dit project is gelicenseerd onder de MIT License - zie het LICENSE bestand voor 
 ```
 MIT License
 
-Copyright (c) 2024 CRYPTEX
+Copyright (c) 2026 CRYPTEX
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -625,7 +625,7 @@ SOFTWARE.
 
 Deze software wordt geleverd "AS IS", zonder enige garantie.
 
-De auteur is niet verantwoordelijk voor:
+De auteur Abelsoftware123 is niet verantwoordelijk voor:
 
 · ❌ Schade veroorzaakt door misbruik van deze software
 · ❌ Illegaal gebruik van deze software
